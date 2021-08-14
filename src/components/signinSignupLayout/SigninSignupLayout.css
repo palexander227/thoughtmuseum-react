@@ -6,10 +6,9 @@
 .login-bg img {
   position: absolute;
   width: 50%;
-  height: 100vh;
+  height: 100%;
   object-fit: cover;
   z-index: 1;
-  /* display: none; */
 }
 
 .logo img {
