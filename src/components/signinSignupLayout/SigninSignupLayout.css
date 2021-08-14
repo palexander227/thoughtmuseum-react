@@ -5,7 +5,7 @@
 
 .login-bg img {
   position: absolute;
-  width: 50%;
+  width: 48%;
   height: 100%;
   object-fit: cover;
   z-index: 1;
@@ -42,7 +42,8 @@
 }
 
 @media (max-width: 992px) {
-  .login-bg img {
+  .login-bg img,
+  .photo img {
     display: none;
   }
 }

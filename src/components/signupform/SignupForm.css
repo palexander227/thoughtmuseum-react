@@ -1,5 +1,5 @@
 .signup-container {
-  height: 120vh;
+  height: 100vh;
   display: flex !important;
   align-items: center;
   justify-content: center;
@@ -10,6 +10,10 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   background: white;
   z-index: 99;
+}
+
+.signup-form h1 {
+  padding-bottom: 10px;
 }
 
 .forgot-pass {
@@ -48,8 +52,23 @@
   text-align: center;
 }
 
+.signup-form .ant-radio-checked .ant-radio-inner {
+  border-color: #00cec9 !important ;
+}
+
+.signup-form .ant-radio-checked .ant-radio-inner:after {
+  background-color: #00cec9;
+}
+
+.signup-form .ant-radio:hover .ant-radio-inner {
+  border-color: #00cec9;
+}
+
 @media (max-width: 768px) {
   .signup-form {
     padding: 20px;
+  }
+  .signup-container {
+    height: 120vh;
   }
 }
