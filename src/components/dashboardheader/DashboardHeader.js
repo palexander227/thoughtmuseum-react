@@ -13,11 +13,11 @@ const DashboardHeader = () => {
     <div className="header">
       <div>
         <h1>Dashboard</h1>
-        <span className="username formobile"> {user.username}</span>
+        <span className="username formobile"> {user.firstName}</span>
       </div>
 
       <div>
-        <span className="username forDesktop">{user.username}</span>
+        <span className="username forDesktop">{user.firstName}</span>
         <Button type="primary" onClick={() => dispatch(actionLogout())}>
           Logout
         </Button>

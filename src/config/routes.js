@@ -10,6 +10,13 @@ export const routes = {
     type: PrivateRoute,
     routeType: "customer",
   },
+  myclass: {
+    name: "Myclass",
+    path: "/myclass",
+    component: lazy(() => import("../modules/myclass/Myclass")),
+    type: PrivateRoute,
+    routeType: "customer",
+  },
   login: {
     name: "Login",
     path: "/login",

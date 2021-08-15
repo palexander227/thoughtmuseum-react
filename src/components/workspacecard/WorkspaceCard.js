@@ -153,7 +153,11 @@ const WorkspaceCard = ({ workspace, fetchAllWorkSpace }) => {
               <strong>{user.role === "teacher" ? "Student" : "Teacher"}</strong>{" "}
               : {userData?.firstName} {userData?.lastName}
             </p>
-            <Link to={"/"}>View Now</Link>
+            <Link
+              to={`/myclass?workspaceId=${workspace.id}&user=${userData?.firstName}`}
+            >
+              View Now
+            </Link>
           </div>
           <div className="footer">
             <p>Post: 5 | Comment: 10</p>
