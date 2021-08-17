@@ -8,4 +8,5 @@ export const images = {
   lockIcon: require("./images/lock.png"),
   dotIcon: require("./images/dot.png"),
   homework: require("./images/homework.png"),
+  banner: require("./images/banner.jpg"),
 };

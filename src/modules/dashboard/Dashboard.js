@@ -53,7 +53,9 @@ const Dashboard = () => {
               <div className="workspce-card ">
                 {workspace.map((work) => (
                   <WorkspaceCard
-                    workspace={work}
+                    key={work.workspace.id}
+                    count={work.count}
+                    workspace={work.workspace}
                     fetchAllWorkSpace={fetchAllWorkSpace}
                   />
                 ))}

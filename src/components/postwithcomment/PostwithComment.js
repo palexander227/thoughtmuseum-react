@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./PostwithComment.css";
-import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { Button, Input, Form, Collapse, message } from "antd";
+import { Button, Avatar, Input, Form, Collapse, message } from "antd";
 import TeacherPost from "../teacherpost/TeacherPost";
 import Loader from "../loader";
 import commentServ from "../../service/comment";
@@ -12,7 +11,6 @@ const { Panel } = Collapse;
 const PostwithComment = ({
   postWithComment,
   userName,
-  studentName,
   postwithCommentLoading,
   fetchPostWithcomment,
 }) => {
@@ -22,7 +20,6 @@ const PostwithComment = ({
   //CREATE COMMENT
   const handleCreateComment = async (value) => {
     setIsCreateComment(true);
-    console.log("pppppp", value);
     try {
       const res = await commentServ.createComment(value);
       message.success(res.message);
@@ -56,7 +53,7 @@ const PostwithComment = ({
                       </div>
                       <div>
                         <p>
-                          {studentName.firstName} {studentName.lastName}
+                          {item.user.firstName} {item.user.lastName}
                         </p>
                         <small>Aug 15</small>
                         <p>{item.content}</p>

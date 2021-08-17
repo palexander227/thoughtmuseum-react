@@ -20,7 +20,6 @@ const Myclass = () => {
   const [workSpace, setworkSpace] = useState({});
   const [postWithComment, setPostWithComment] = useState([]);
   const [userName, setUserName] = useState({});
-  const [studentName, setStudentName] = useState({});
   const [workspaceLoading, setWorkspaceLoading] = useState(true);
   const [postwithCommentLoading, setPostwithCommentLoading] = useState(true);
 
@@ -28,8 +27,10 @@ const Myclass = () => {
   const fetchAllworkSpace = async () => {
     try {
       const res = await workspaceServ.getAllWorkSpace();
-      const work = res.workspaces.filter((item) => item.id == workSpaceId);
-      setworkSpace(work[0]);
+      const work = res.workspaces.filter(
+        (item) => item.workspace?.id == workSpaceId
+      );
+      setworkSpace(work[0]?.workspace);
     } catch (error) {
       console.log(error);
     } finally {
@@ -41,18 +42,7 @@ const Myclass = () => {
   const fetchUserById = async (id) => {
     try {
       const res = await userServ.getUserById(id);
-      console.log("uyyuyu", res.user);
       setUserName(res.user);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const fetchUserByIdForStudentName = async (id) => {
-    try {
-      const res = await userServ.getUserById(id);
-      console.log("studentssss", res.user);
-      setStudentName(res.user);
     } catch (error) {
       console.log(error);
     }
@@ -61,10 +51,7 @@ const Myclass = () => {
   const fetchPostWithcomment = async () => {
     try {
       const res = await postServ.postWithComment(workSpaceId);
-      console.log("ooooooooo", res.posts[0]?.comments[0]?.userId);
       fetchUserById(res.posts[0]?.userId);
-
-      fetchUserByIdForStudentName(res.posts[0]?.comments[0]?.userId);
       setPostWithComment(res.posts);
     } catch (error) {
       console.log(error);
@@ -103,7 +90,6 @@ const Myclass = () => {
               <PostwithComment
                 postWithComment={postWithComment}
                 userName={userName}
-                studentName={studentName}
                 postwithCommentLoading={postwithCommentLoading}
                 fetchPostWithcomment={fetchPostWithcomment}
               />

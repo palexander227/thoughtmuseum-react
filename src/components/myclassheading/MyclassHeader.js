@@ -15,15 +15,14 @@ const MyclassHeader = ({ workSpace, workspaceLoading }) => {
         <Loader />
       ) : (
         <div className="myclass-haeding">
-          <div>
+          <img src={images.banner} alt="homework" />
+          <div className="myclass-content">
+            <h1>{workSpace?.title}</h1>
             <p className="desc">{workSpace?.description}</p>
             <p>
               <span className="name">{user.firstName}</span> with{" "}
               <span className="name">{studentNamesss}</span>
             </p>
-          </div>
-          <div className="haeding-img">
-            <img src={images.homework} alt="homework" />
           </div>
         </div>
       )}
