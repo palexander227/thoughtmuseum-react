@@ -34,7 +34,7 @@ const MyProfile = () => {
       <DashboardHeader />
       <div className="container">
         <Row>
-          <Col xs={24} sm={4} md={6} lg={8} xl={10} className="user-profile">
+          <Col xs={24} sm={20} md={15} lg={11} xl={10} className="user-profile">
             <div className="header">
               <Avatar size={45} icon={<UserOutlined />} />
               <div className="action-btn">
