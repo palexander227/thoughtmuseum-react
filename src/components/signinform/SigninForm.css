@@ -41,6 +41,11 @@
   justify-content: space-evenly;
 }
 
+.flip-form {
+  color: #4771bb;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .signin-form {
     padding: 20px;

@@ -8,7 +8,7 @@ const ProtectedRoute = (props) => {
   return isLoggedIn ? (
     <Redirect
       to={{
-        pathname: routes.home.path,
+        pathname: routes.workspace.path,
       }}
     />
   ) : (

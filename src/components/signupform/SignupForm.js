@@ -6,7 +6,7 @@ import UserIcon from "../../components/Icon/UserIcon";
 import { Link, useHistory } from "react-router-dom";
 import userServ from "../../service/user";
 
-const SignupForm = () => {
+const SignupForm = ({ flipForm }) => {
   const [valued, setValue] = React.useState(1);
   const [role, setRole] = useState("teacher");
   const [isloading, setIsLoading] = useState(false);
@@ -100,8 +100,8 @@ const SignupForm = () => {
 
           <div className="login-footer">
             <p>Already a member?</p>
-            <p>
-              <Link to={"/login"}>Signin</Link>
+            <p className="flip-form" onClick={() => flipForm()}>
+              Signin
             </p>
           </div>
         </Form>

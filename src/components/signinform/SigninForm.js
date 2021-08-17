@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import "./SigninForm.css";
-import { Checkbox, Form, Button, Input, Row, Col, message } from "antd";
+import { Form, Button, Input, Row, Col, message } from "antd";
 import LockIcon from "../../components/Icon/LockIcon";
 import UserIcon from "../../components/Icon/UserIcon";
-import { Link } from "react-router-dom";
 import userServ from "../../service/user";
 import { useDispatch } from "react-redux";
 import { actionLogin } from "../../store/reducer/user";
 
-const SigninForm = () => {
+const SigninForm = ({ flipForm }) => {
   //state
   const [isloading, setIsLoading] = useState(false);
 
@@ -72,8 +71,8 @@ const SigninForm = () => {
 
           <div className="login-footer">
             <p>Not a member?</p>
-            <p>
-              <Link to={"/signup"}>Create Account</Link>
+            <p className="flip-form" onClick={() => flipForm()}>
+              Create Account
             </p>
           </div>
         </Form>

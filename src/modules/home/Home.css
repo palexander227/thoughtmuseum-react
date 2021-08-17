@@ -1,5 +1,6 @@
 .loginPage {
   background: #f1f2f6;
+  height: 100vh;
   position: relative;
 }
 
@@ -8,7 +9,14 @@
   width: 48%;
   height: 100%;
   object-fit: cover;
-  z-index: 1;
+}
+
+.photo img {
+  position: absolute;
+  width: 300px;
+  bottom: 30%;
+  left: 5%;
+  z-index: 3;
 }
 
 .logo img {
@@ -29,17 +37,39 @@
 .right-circle img {
   position: absolute;
   width: 150px;
+  z-index: 2;
   bottom: 0;
   right: 0;
 }
 
-.photo img {
+/* ********** */
+
+.flip-card {
   position: absolute;
-  width: 300px;
-  bottom: 30%;
-  left: 5%;
-  z-index: 3;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease-in-out;
+  z-index: 5;
 }
+
+.flip-card .front,
+.flip-card .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card .back {
+  transform: rotateY(180deg);
+}
+
+.flip-card.active {
+  transform: rotateY(180deg);
+}
+
+/* ******************** */
 
 @media (max-width: 992px) {
   .login-bg img,

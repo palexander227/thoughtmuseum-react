@@ -9,4 +9,5 @@ export const images = {
   dotIcon: require("./images/dot.png"),
   homework: require("./images/homework.png"),
   banner: require("./images/banner.jpg"),
+  attach: require("./images/attach.png"),
 };

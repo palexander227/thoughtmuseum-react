@@ -1,0 +1,11 @@
+.dssdsdsd {
+  background: black !important;
+}
+
+.mini-chat:focus {
+  background: #4771bb !important;
+}
+
+.mini-chat:focus .last-msg {
+  color: white;
+}

@@ -11,6 +11,101 @@
   width: 300px;
 }
 
+/* ################## */
+.chatBox {
+  border: 1px solid #ddd;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+.mini-chat {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  cursor: pointer;
+}
+
+
+
+.mini-chat:hover {
+  background: #4771bb;
+}
+
+.mini-chat:hover .last-msg {
+  color: white;
+}
+
+.mini-chat .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ddd;
+  margin-right: 5px;
+}
+
+.mini-chat .content {
+  margin-left: 10px;
+}
+
+.mini-chat .content p {
+  margin-bottom: unset;
+}
+
+.mini-chat .content .name {
+  font-weight: 600;
+  color: black;
+}
+
+.search-box {
+  margin: 10px;
+}
+
+.chatBox .taecher {
+  width: 200px;
+  border-radius: 5px;
+  padding: 5px;
+  background: #f1f2f6;
+}
+
+.chatBox .student-bx .student {
+  width: 200px;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px 0;
+  background: #c7d2e4;
+}
+
+.chatBox .student-bx {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.send-msg .ant-input {
+  border-radius: 20px !important;
+  height: 35px !important;
+  width: 250px !important;
+}
+
+.msg-input {
+  position: relative;
+}
+
+.send-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.attach-icon {
+  position: absolute;
+  top: 12px;
+  right: 50px;
+  font-size: 18px;
+  color: gray;
+  cursor: pointer;
+}
+
 @media (max-width: 576px) {
   .workspce-card {
     grid-template-columns: repeat(auto-fill, 320px);
