@@ -22,10 +22,10 @@ const WorkspaceCard = ({ workspace, count, fetchAllWorkSpace }) => {
   const fetchAllUser = async () => {
     try {
       if (user?.role === "teacher") {
-        const res = await userServ.getUserById(workspace.studentId);
+        const res = await userServ.getUserById(workspace?.studentId);
         setUserData(res.user);
       } else if (user?.role === "student") {
-        const res = await userServ.getUserById(workspace.teacherId);
+        const res = await userServ.getUserById(workspace?.teacherId);
         setUserData(res.user);
       }
     } catch (err) {
@@ -108,7 +108,7 @@ const WorkspaceCard = ({ workspace, count, fetchAllWorkSpace }) => {
       ) : (
         <div className="card">
           <div className="title">
-            <h1>{workspace.title}</h1>
+            <h1>{workspace?.title}</h1>
 
             {user?.role === "teacher" ? (
               <Dropdown
@@ -142,7 +142,7 @@ const WorkspaceCard = ({ workspace, count, fetchAllWorkSpace }) => {
                 <Form.Item
                   name="title"
                   rules={[{ required: true, message: "Title is required!" }]}
-                  initialValue={workspace.title}
+                  initialValue={workspace?.title}
                 >
                   <Input placeholder="Title" />
                 </Form.Item>
@@ -152,7 +152,7 @@ const WorkspaceCard = ({ workspace, count, fetchAllWorkSpace }) => {
                   rules={[
                     { required: true, message: "Description is required!" },
                   ]}
-                  initialValue={workspace.description}
+                  initialValue={workspace?.description}
                 >
                   <Input placeholder="Description" />
                 </Form.Item>
@@ -166,21 +166,21 @@ const WorkspaceCard = ({ workspace, count, fetchAllWorkSpace }) => {
             </Modal>
           </div>
           <div className="body">
-            <p className="disc">{workspace.description}</p>
+            <p className="disc">{workspace?.description}</p>
             <p>
               <strong>{user.role === "teacher" ? "Student" : "Teacher"}</strong>{" "}
               : {userData?.firstName} {userData?.lastName}
             </p>
             <Link
-              to={`/myclass?workspaceId=${workspace.id}&user=${userData?.firstName}`}
+              to={`/myclass?workspaceId=${workspace?.id}&user=${userData?.firstName}`}
             >
               View Now
             </Link>
           </div>
           <div className="footer">
             <p>
-              Post: {count.post} | Comment:{" "}
-              {count.comment.length == 0 ? 0 : count.comment}
+              Post: {count?.post} | Comment:{" "}
+              {count?.comment.length == 0 ? 0 : count?.comment}
             </p>
           </div>
         </div>

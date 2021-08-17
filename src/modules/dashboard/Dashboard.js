@@ -16,6 +16,7 @@ const Dashboard = () => {
   const fetchAllWorkSpace = async () => {
     try {
       const res = await workspaceServ.getAllWorkSpace();
+      console.log("workkkkk", res.workspaces);
       setWorkspace(res.workspaces);
     } catch (err) {
       console.log(err);
@@ -53,7 +54,7 @@ const Dashboard = () => {
               <div className="workspce-card ">
                 {workspace.map((work) => (
                   <WorkspaceCard
-                    key={work.workspace.id}
+                    key={work?.workspace?.id}
                     count={work.count}
                     workspace={work.workspace}
                     fetchAllWorkSpace={fetchAllWorkSpace}
