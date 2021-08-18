@@ -5,23 +5,73 @@ import WorkspaceHeader from "../../components/workspaceheader/WorkspaceHeader";
 import "./Dashboard.css";
 import workspaceServ from "../../service/workspace";
 import Loader from "../../components/loader";
-import { Alert, Col, Input, Drawer, Button, Row } from "antd";
+import { Alert, message } from "antd";
 import { useSelector } from "react-redux";
-import MiniChat from "../../components/minichat/MiniChat";
 import ChatWindow from "../../components/chatbox/ChatWindow";
 import MessangerDrawer from "../../components/messangerdrawer/MessangerDrawer";
+
+const data = [
+  {
+    id: 1,
+    name: "Britt Brooke",
+    lastmsg: "Thanks for helping me",
+  },
+  {
+    id: 2,
+    name: "George Eads",
+    lastmsg: "Thanks for helping me",
+  },
+  {
+    id: 3,
+    name: "Selena Gomez",
+    lastmsg: "Thanks for helping me",
+  },
+  {
+    id: 4,
+    name: "James Franco",
+    lastmsg: "Thanks for helping me",
+  },
+  {
+    id: 5,
+    name: "Dwayne Johnson",
+    lastmsg: "Thanks for helping me",
+  },
+  {
+    id: 6,
+    name: "Octavia Spencer",
+    lastmsg: "Thanks for helping me",
+  },
+  {
+    id: 7,
+    name: "Margot Robbie",
+    lastmsg: "Thanks for helping me",
+  },
+  {
+    id: 8,
+    name: "Nicolas Cage",
+    lastmsg: "Thanks for helping me",
+  },
+  {
+    id: 9,
+    name: "Tiffany Haddish",
+    lastmsg: "Thanks for helping me",
+  },
+  {
+    id: 10,
+    name: "Johnny Depp",
+    lastmsg: "Thanks for helping me",
+  },
+];
 
 const Dashboard = () => {
   const [workspace, setWorkspace] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useSelector((state) => state.userStore);
-  const [show, setShow] = useState(null);
   const [users, setUsers] = useState([]);
 
   const fetchAllWorkSpace = async () => {
     try {
       const res = await workspaceServ.getAllWorkSpace();
-      console.log("workkkkk", res.workspaces);
       setWorkspace(res.workspaces);
     } catch (err) {
       console.log(err);
@@ -34,24 +84,26 @@ const Dashboard = () => {
     fetchAllWorkSpace();
   }, []);
 
-  const handleClose = (id)=>{
-    console.log('ioioiooi',id)
-   const newww = users.filter((item)=>item.key !== id)
-   console.log('ookokokkok',newww)
-   setUsers([...users,newww])
-  }
-
-  const showMessenger = (user) => {
-    console.log("zafar", user);
-
-    if (users.length < 2) {
-      setUsers([...users, <ChatWindow key={user.id} user={user} handleClose={handleClose} />]);
-    } else {
-      window.alert("only two messenger allowed");
-    }
+  const handleClose = (id) => {
+    setUsers((preVal) => {
+      return preVal.filter((item) => {
+        return item.id !== id;
+      });
+    });
   };
 
-  console.log(users);
+  const showMessenger = (id) => {
+    const neww = data.filter(
+      (item) => item.id == id && users[0]?.id !== item.id
+    );
+    if (neww.length > 0) {
+      if (users.length < 2) {
+        setUsers([...users, neww[0]]);
+      } else {
+        message.warning("Maximum two messenger allowed!");
+      }
+    }
+  };
 
   return (
     <div className="dashboard">
@@ -88,7 +140,11 @@ const Dashboard = () => {
           <div className="message-icon">
             <MessangerDrawer showMessenger={showMessenger} />
           </div>
-          <div className="msg-box">{users}</div>
+          <div className="msg-box">
+            {users.map((item) => (
+              <ChatWindow key={item.id} item={item} handleClose={handleClose} />
+            ))}
+          </div>
         </div>
       )}
     </div>

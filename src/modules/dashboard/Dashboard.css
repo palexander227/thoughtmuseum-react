@@ -32,7 +32,6 @@
   position: fixed;
   bottom: 0;
   display: flex !important;
-  /* display: none; */
 }
 
 @media (max-width: 576px) {

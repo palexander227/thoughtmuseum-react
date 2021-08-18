@@ -5,8 +5,8 @@
 
 .login-bg img {
   position: absolute;
-  width: 50%;
-  height: 100%;
+  width: 48%;
+  height: 100vh;
   object-fit: cover;
   z-index: 1;
 }

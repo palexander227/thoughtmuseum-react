@@ -4,19 +4,16 @@ import { UserOutlined } from "@ant-design/icons";
 import { Form, Button, Input, Avatar } from "antd";
 import { SendOutlined, TagsOutlined, CloseOutlined } from "@ant-design/icons";
 
-const ChatWindow = ({ handleClose ,user}) => {
-
-
-
+const ChatWindow = ({ handleClose, item }) => {
   return (
     <div className="chat-window">
-      <div className="close-messenger" onClick={() => handleClose(user.id)}>
+      <div className="close-messenger" onClick={() => handleClose(item.id)}>
         <CloseOutlined />
       </div>
       <div className="caht-haeding">
         <Avatar size={45} icon={<UserOutlined />} />
         <div className="content">
-          <p className="name">Britt Brooke</p>
+          <p className="name">{item.name}</p>
           <small className="status">online</small>
         </div>
       </div>

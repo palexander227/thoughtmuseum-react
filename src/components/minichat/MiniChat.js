@@ -9,7 +9,7 @@ const MiniChat = ({ item, showMessenger }) => {
       className="mini-chat"
       key={item.id}
       tabIndex={item.id}
-      onClick={() => showMessenger(item)}
+      onClick={() => showMessenger(item.id)}
     >
       <div className="dot"></div>
       <Avatar size={45} icon={<UserOutlined />} />
