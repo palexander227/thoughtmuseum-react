@@ -10,4 +10,5 @@ export const images = {
   homework: require("./images/homework.png"),
   banner: require("./images/banner.jpg"),
   attach: require("./images/attach.png"),
+  msgicon: require("./images/msgicon.png"),
 };

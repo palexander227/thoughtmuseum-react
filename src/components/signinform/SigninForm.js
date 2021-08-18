@@ -6,8 +6,9 @@ import UserIcon from "../../components/Icon/UserIcon";
 import userServ from "../../service/user";
 import { useDispatch } from "react-redux";
 import { actionLogin } from "../../store/reducer/user";
+import { Link } from "react-router-dom";
 
-const SigninForm = ({ flipForm }) => {
+const SigninForm = () => {
   //state
   const [isloading, setIsLoading] = useState(false);
 
@@ -71,8 +72,8 @@ const SigninForm = ({ flipForm }) => {
 
           <div className="login-footer">
             <p>Not a member?</p>
-            <p className="flip-form" onClick={() => flipForm()}>
-              Create Account
+            <p>
+              <Link to={"/signup"}>Create Account</Link>
             </p>
           </div>
         </Form>

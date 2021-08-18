@@ -3,9 +3,9 @@ import PrivateRoute from "./PrivateRoute.component";
 import ProtectedRoute from "./ProtectedRoute";
 
 export const routes = {
-  workspace: {
-    name: "Workspace",
-    path: "/workspace",
+  home: {
+    name: "Home",
+    path: "/",
     component: lazy(() => import("../modules/dashboard/Dashboard")),
     type: PrivateRoute,
     routeType: "customer",
@@ -24,10 +24,17 @@ export const routes = {
     type: PrivateRoute,
     routeType: "customer",
   },
-  home: {
-    name: "Home",
-    path: "/",
-    component: lazy(() => import("../modules/home/Home")),
+  login: {
+    name: "Login",
+    path: "/login",
+    component: lazy(() => import("../modules/signin/Signin")),
+    type: ProtectedRoute,
+    routeType: "customer",
+  },
+  signup: {
+    name: "Signup",
+    path: "/signup",
+    component: lazy(() => import("../modules/signup/Signup")),
     type: ProtectedRoute,
     routeType: "customer",
   },
