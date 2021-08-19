@@ -63,16 +63,15 @@ const MessangerDrawer = ({ showMessenger }) => {
   const [showuser, setShowUser] = useState(false);
 
   const handleSearch = (e) => {
-    const dede = data.filter((user) =>
+    const filterUser = data.filter((user) =>
       user.name.toLowerCase().includes(e?.target?.value.toLowerCase())
     );
 
-    setFilterData(dede);
+    setFilterData(filterUser);
 
-    console.log(dede);
   };
 
-  const myfunnnn = () => {
+  const handleShowHide = () => {
     if (showuser === false) {
       setShowUser(true);
     } else {
@@ -82,7 +81,7 @@ const MessangerDrawer = ({ showMessenger }) => {
 
   return (
     <div className={showuser ? "chat-user active" : "chat-user"}>
-      <div className="arror" onClick={myfunnnn}>
+      <div className="arror" onClick={handleShowHide}>
         {showuser ? <DownOutlined /> : <UpOutlined />}
         <img src={images.msgicon} alt="msgicon" />
       </div>

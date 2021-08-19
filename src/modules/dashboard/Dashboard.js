@@ -5,7 +5,7 @@ import WorkspaceHeader from "../../components/workspaceheader/WorkspaceHeader";
 import "./Dashboard.css";
 import workspaceServ from "../../service/workspace";
 import Loader from "../../components/loader";
-import { Alert, message, Input } from "antd";
+import { Alert, message } from "antd";
 import { useSelector } from "react-redux";
 import ChatWindow from "../../components/chatbox/ChatWindow";
 import MessangerDrawer from "../../components/messangerdrawer/MessangerDrawer";
@@ -74,7 +74,7 @@ const Dashboard = () => {
       const res = await workspaceServ.getAllWorkSpace();
       setWorkspace(res.workspaces);
     } catch (err) {
-      console.log(err);
+      message.error("Unable to fetch workspaces, please reload. Reason: " + err);
     } finally {
       setIsLoading(false);
     }
@@ -93,15 +93,15 @@ const Dashboard = () => {
   };
 
   const showMessenger = (id) => {
-    const neww = data.filter(
-      (item) => item.id == id && users[0]?.id !== item.id
-    );
+    const checkExistingUser = users.some((dataa) => dataa.id == id);
+    const filterUser = data.filter((item) => item.id == id && !checkExistingUser);
 
-    if (neww.length > 0) {
-      let newarr = [...users, neww[0]];
+    if (filterUser.length > 0) {
+      let newarr = [...users, filterUser[0]];
       const getTwoUsers = newarr.slice(newarr?.length - 2, newarr?.length);
       setUsers(getTwoUsers);
     }
+
   };
 
   return (
