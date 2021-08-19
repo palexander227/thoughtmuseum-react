@@ -5,7 +5,7 @@ import WorkspaceHeader from "../../components/workspaceheader/WorkspaceHeader";
 import "./Dashboard.css";
 import workspaceServ from "../../service/workspace";
 import Loader from "../../components/loader";
-import { Alert, message } from "antd";
+import { Alert, message, Input } from "antd";
 import { useSelector } from "react-redux";
 import ChatWindow from "../../components/chatbox/ChatWindow";
 import MessangerDrawer from "../../components/messangerdrawer/MessangerDrawer";
@@ -96,12 +96,11 @@ const Dashboard = () => {
     const neww = data.filter(
       (item) => item.id == id && users[0]?.id !== item.id
     );
+
     if (neww.length > 0) {
-      if (users.length < 2) {
-        setUsers([...users, neww[0]]);
-      } else {
-        message.warning("Maximum two messenger allowed!");
-      }
+      let newarr = [...users, neww[0]];
+      const getTwoUsers = newarr.slice(newarr?.length - 2, newarr?.length);
+      setUsers(getTwoUsers);
     }
   };
 
@@ -137,9 +136,9 @@ const Dashboard = () => {
               ))}
             </div>
           )}
-          <div className="message-icon">
-            <MessangerDrawer showMessenger={showMessenger} />
-          </div>
+
+          <MessangerDrawer showMessenger={showMessenger} />
+
           <div className="msg-box">
             {users.map((item) => (
               <ChatWindow key={item.id} item={item} handleClose={handleClose} />
