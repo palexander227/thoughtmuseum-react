@@ -36,7 +36,7 @@ class RestfulProvider {
         .catch((error) => {
           reject(
             error.response?.data?.message ||
-              "Server is down, please check after some time !!"
+              "Server is down, please check after some time!!"
           );
         });
     });
