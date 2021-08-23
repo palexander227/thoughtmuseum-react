@@ -67,7 +67,7 @@ const ChatWindow = ({ handleClose, item }) => {
           <p className="name">
             {item.firstName} {item.lastName}
           </p>
-          <small className="status">online</small>
+          <small className="status">status</small>
         </div>
         <div className="close-messenger" onClick={() => handleClose(item.id)}>
           <CloseOutlined />
@@ -90,7 +90,7 @@ const ChatWindow = ({ handleClose, item }) => {
               <div
                 key={text.id}
                 className="taecher"
-                style={{ marginBottom: "10px", color: "red" }}
+                style={{ marginBottom: "10px" }}
               >
                 {text.message}
               </div>
