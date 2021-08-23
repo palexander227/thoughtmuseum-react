@@ -14,8 +14,10 @@ const MiniChat = ({ item, showMessenger }) => {
       <div className="dot"></div>
       <Avatar size={45} icon={<UserOutlined />} />
       <div className="content">
-        <p className="name">{item.name}</p>
-        <p className="last-msg">You: {item.lastmsg}</p>
+        <p className="name">
+          {item.firstName} {item.lastName}
+        </p>
+        {/* <p className="last-msg">You: {item.lastmsg}</p> */}
       </div>
     </div>
   );
