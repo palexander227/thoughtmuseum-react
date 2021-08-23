@@ -11,7 +11,7 @@ const MiniChat = ({ item, showMessenger }) => {
       tabIndex={item.id}
       onClick={() => showMessenger(item.id)}
     >
-      <div className="dot"></div>
+      <div className={item.status ? "dot-online" : "dot"}></div>
       <Avatar size={45} icon={<UserOutlined />} />
       <div className="content">
         <p className="name">

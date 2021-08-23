@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 import { io } from "socket.io-client";
 
-const socket = io(`https://thoughtmuseum-api.herokuapp.com`);
+// const socket = io(`http://localhost:12000`);
 
 const SigninForm = () => {
   //state
@@ -27,7 +27,7 @@ const SigninForm = () => {
       const { token, user } = res;
 
       dispatch(actionLogin(user, token)); //store in redux and mark as login
-      // console.log("checkuserid", user.id);
+      console.log("checkuserid", user.id);
       // socket.emit("join", user.id);
     } catch (err) {
       message.error("Login Fail. Reason: " + err);

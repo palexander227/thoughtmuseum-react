@@ -13,6 +13,7 @@ import userServ from "../../service/user";
 import { io } from "socket.io-client";
 import chatServ from "../../service/chatroom";
 
+const socket = io(`http://localhost:12000`);
 // const socket = io(`https://thoughtmuseum-api.herokuapp.com`);
 
 const Dashboard = () => {
@@ -46,10 +47,27 @@ const Dashboard = () => {
     }
   };
 
-  useEffect(() => {
-    fetchAllUser();
-    fetchAllWorkSpace();
+  useEffect(async () => {
+    await fetchAllUser();
+    await fetchAllWorkSpace();
+    await realTimeIntraction();
   }, []);
+
+  const realTimeIntraction = () => {
+    socket.emit("join", user.id);
+
+    socket.on('userOnline', (data) => {
+      console.log({data});
+    });
+
+    socket.on('userOffline', (data) => {
+      console.log({data});
+    })
+
+    socket.on('addMessage', (data) => {
+      console.log({data});
+    })
+  }
 
   const handleClose = (id) => {
     setUsers((preVal) => {

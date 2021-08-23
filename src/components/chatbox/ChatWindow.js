@@ -7,7 +7,7 @@ import { io } from "socket.io-client";
 import chatServ from "../../service/chatroom";
 import { useSelector } from "react-redux";
 
-const socket = io(`https://thoughtmuseum-api.herokuapp.com`);
+const socket = io(`http://localhost:12000`);
 
 const ChatWindow = ({ handleClose, item }) => {
   const { user } = useSelector((state) => state.userStore);
@@ -44,7 +44,7 @@ const ChatWindow = ({ handleClose, item }) => {
 
     try {
       const res = await chatServ.SendOnlyMessage(chatInfo);
-      // socket.emit("addMessage", res.data);
+      socket.emit("newMessage", res.data);
       fetchConvsersation();
     } catch (err) {
       console.log(err);
@@ -67,7 +67,7 @@ const ChatWindow = ({ handleClose, item }) => {
           <p className="name">
             {item.firstName} {item.lastName}
           </p>
-          <small className="status">status</small>
+          <small className="status">{item.status ? 'Online' : 'Offline'}</small>
         </div>
         <div className="close-messenger" onClick={() => handleClose(item.id)}>
           <CloseOutlined />
