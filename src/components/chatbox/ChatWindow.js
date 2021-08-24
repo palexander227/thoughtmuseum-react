@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./ChatWindow.css";
 import { UserOutlined } from "@ant-design/icons";
 import { Form, Button, Input, Avatar } from "antd";
@@ -7,18 +7,24 @@ import { io } from "socket.io-client";
 import chatServ from "../../service/chatroom";
 import { useSelector } from "react-redux";
 
-const socket = io(`http://localhost:12000`);
+const socket = io(`https://thoughtmuseum-api.herokuapp.com`);
 
 const ChatWindow = ({ handleClose, item }) => {
   const { user } = useSelector((state) => state.userStore);
+  const { messages } = useSelector((state) => state.messageStore);
   const [msg, setMsg] = useState([]);
   const [form] = Form.useForm();
   const [media, setMedia] = useState([]);
 
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({});
+  }
+
   const fetchConvsersation = async () => {
     try {
-      const res = await chatServ.getConverstion(item.id);
-      setMsg(res.foundMessages);
+      chatServ.getConverstion(item.id);
     } catch (err) {
       console.log(err);
     }
@@ -27,6 +33,16 @@ const ChatWindow = ({ handleClose, item }) => {
   useEffect(() => {
     fetchConvsersation();
   }, []);
+
+  useEffect(()=>{
+    scrollToBottom();
+  }, [msg])
+
+  useEffect(() => {
+    if (Object.keys(messages).length && messages[item.id]) {
+      setMsg([...messages[item.id]]);
+    }
+  }, [messages]);
 
   const handleSendMessage = async (value) => {
     // const form = new FormData();
@@ -77,9 +93,8 @@ const ChatWindow = ({ handleClose, item }) => {
         <div>
           {msg.map((text) =>
             text.recieverId == item.id ? (
-              <div className="ctudenttt">
+              <div className="ctudenttt" key={text.id}>
                 <div
-                  key={text.id}
                   className="taecher"
                   style={{ marginBottom: "10px" }}
                 >
@@ -97,7 +112,7 @@ const ChatWindow = ({ handleClose, item }) => {
             )
           )}
         </div>
-
+        <div ref={messagesEndRef} />
         <Form
           form={form}
           preserve={false}

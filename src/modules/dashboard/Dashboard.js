@@ -11,10 +11,11 @@ import ChatWindow from "../../components/chatbox/ChatWindow";
 import MessangerDrawer from "../../components/messangerdrawer/MessangerDrawer";
 import userServ from "../../service/user";
 import { io } from "socket.io-client";
-import chatServ from "../../service/chatroom";
+import { store } from "./../../store";
+import { getNewMessage } from './../../store/reducer/message';
 
-const socket = io(`http://localhost:12000`);
-// const socket = io(`https://thoughtmuseum-api.herokuapp.com`);
+//const socket = io(`http://localhost:12000`);
+const socket = io(`https://thoughtmuseum-api.herokuapp.com`);
 
 const Dashboard = () => {
   const [workspace, setWorkspace] = useState([]);
@@ -65,8 +66,9 @@ const Dashboard = () => {
     })
 
     socket.on('addMessage', (data) => {
-      console.log({data});
+      store.dispatch(getNewMessage(data, data.senderId));
     })
+
   }
 
   const handleClose = (id) => {
