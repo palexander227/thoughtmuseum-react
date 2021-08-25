@@ -12,13 +12,11 @@ export const getAllMessage = (data, reciverId) => {
 };
 
 export const getNewMessage = (data, reciverId) => {
-    console.log(reciverId)
   return { type: NEW_MESSAGE, payload: {messages: data, id: reciverId }  };
 };
 
 const messageReducer = (state = { ...initialState }, action) => {
     let messages;
-    if (action.payload) console.log(state.messages, '----', action.payload.id, '===', state.messages[action.payload.id])
     switch (action.type) {
         case NEW_MESSAGE:
             if (action.payload.id && state.messages[action.payload.id]) state.messages[action.payload.id].push(action.payload.messages);

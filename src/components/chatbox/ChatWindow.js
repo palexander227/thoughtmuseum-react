@@ -2,19 +2,48 @@ import React, { useState, useEffect, useRef } from "react";
 import "./ChatWindow.css";
 import { UserOutlined } from "@ant-design/icons";
 import { Form, Button, Input, Avatar } from "antd";
-import { SendOutlined, TagsOutlined, CloseOutlined } from "@ant-design/icons";
+import { SendOutlined, TagsOutlined, CloseOutlined, AudioOutlined } from "@ant-design/icons";
 import { io } from "socket.io-client";
 import chatServ from "../../service/chatroom";
 import { useSelector } from "react-redux";
 
 const socket = io(`https://thoughtmuseum-api.herokuapp.com`);
+const { Search } = Input;
 
 const ChatWindow = ({ handleClose, item }) => {
   const { user } = useSelector((state) => state.userStore);
   const { messages } = useSelector((state) => state.messageStore);
   const [msg, setMsg] = useState([]);
+  const [selectedFile, setSelectedFile] = useState('');
   const [form] = Form.useForm();
   const [media, setMedia] = useState([]);
+
+  const suffix = (
+    <div className="file-input-container">
+      <input
+        type="file"
+        onChange={(e) => handleMedia(e)}
+        id="hidden-file"
+      />
+      <label htmlFor="hidden-file" className="attachFile">
+        <TagsOutlined />
+      </label>
+    </div>
+  );
+
+  const removeFile = () => {
+    setMedia([]);
+    setSelectedFile('')
+  }
+
+  const handleMedia = (e) => {
+    setMedia(e.target.files[0]);
+    setSelectedFile(e.target.files[0].name)
+  }
+  
+  const onSearch = value => {
+    handleSendMessage({message: value});
+  }
 
   const messagesEndRef = useRef(null);
 
@@ -50,13 +79,24 @@ const ChatWindow = ({ handleClose, item }) => {
     // form.append("isMedia", true);
     // form.append("media", media);
     // form.append("recieverId", item?.id);
-
-    const chatInfo = {
+    let chatInfo = {
       message: value.message,
       isMedia: false,
-      mediaUrl: "",
+      media: "",
       recieverId: item?.id,
     };
+    if (media instanceof File) {
+      const formData = new FormData();
+      formData.append(
+        "media",
+        media
+      );
+      formData.append("message", value.message ? value.message : '');
+      formData.append("isMedia", true);
+      formData.append("recieverId", item?.id);
+      chatInfo = formData;
+    }
+    
 
     try {
       const res = await chatServ.SendOnlyMessage(chatInfo);
@@ -65,6 +105,8 @@ const ChatWindow = ({ handleClose, item }) => {
     } catch (err) {
       console.log(err);
     } finally {
+      setMedia([]);
+      setSelectedFile('');
       form.resetFields();
     }
   };
@@ -98,6 +140,18 @@ const ChatWindow = ({ handleClose, item }) => {
                   className="taecher"
                   style={{ marginBottom: "10px" }}
                 >
+                  {text.mediaUrl &&
+                    <div>
+                      <a href={text.mediaUrl} download target="_blank" className="media-file">
+                        {text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/')+1).match(/.(jpg|jpeg|png)$/i) &&
+                          <img src={text.mediaUrl} />
+                        }
+                        {!text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/')+1).match(/.(jpg|jpeg|png)$/i) &&
+                          text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/')+1)
+                        }
+                        </a>
+                    </div>
+                  }
                   {text.message}
                 </div>
               </div>
@@ -119,30 +173,17 @@ const ChatWindow = ({ handleClose, item }) => {
           className="msg-input"
           name="normal_modal"
           autoFocus={true}
-          onFinish={handleSendMessage}
         >
+          {selectedFile && <div className="selected-file">{selectedFile}<CloseOutlined className="close-icon" onClick={removeFile}/></div>}
           <Form.Item name="message">
-            <Input placeholder="Tpye here.." />
-          </Form.Item>
-
-          <Form.Item className="sendBtn">
-            <Button
-              size="small"
-              type="primary"
-              htmlType="submit"
-              icon={<SendOutlined />}
+            <Search
+              placeholder="Tpye here.."
+              enterButton={<SendOutlined />}
+              size="large"
+              suffix={suffix}
+              onSearch={onSearch}
             />
           </Form.Item>
-          <div className="file-input-container">
-            <input
-              type="file"
-              onChange={(e) => setMedia(e.target.files[0])}
-              id="hidden-file"
-            />
-            <label htmlFor="hidden-file" className="attachFile">
-              <TagsOutlined />
-            </label>
-          </div>
         </Form>
       </div>
     </div>
