@@ -18,14 +18,17 @@ const ChatWindow = ({ handleClose, item }) => {
   const [form] = Form.useForm();
   const [media, setMedia] = useState([]);
 
+  const inputEl = useRef(null);
+
   const suffix = (
     <div className="file-input-container">
       <input
         type="file"
         onChange={(e) => handleMedia(e)}
-        id="hidden-file"
+        id={`hidden-file${item.id}`}
+        key={media}
       />
-      <label htmlFor="hidden-file" className="attachFile">
+      <label htmlFor={`hidden-file${item.id}`} className="attachFile">
         <TagsOutlined />
       </label>
     </div>
@@ -41,7 +44,7 @@ const ChatWindow = ({ handleClose, item }) => {
     setSelectedFile(e.target.files[0].name)
   }
   
-  const onSearch = value => {
+  const onSearch = (value) => {
     handleSendMessage({message: value});
   }
 
@@ -87,13 +90,13 @@ const ChatWindow = ({ handleClose, item }) => {
     };
     if (media instanceof File) {
       const formData = new FormData();
+      formData.append("message", value.message ? value.message : '');
+      formData.append("isMedia", true);
+      formData.append("recieverId", item?.id);
       formData.append(
         "media",
         media
       );
-      formData.append("message", value.message ? value.message : '');
-      formData.append("isMedia", true);
-      formData.append("recieverId", item?.id);
       chatInfo = formData;
     }
     
@@ -108,6 +111,7 @@ const ChatWindow = ({ handleClose, item }) => {
       setMedia([]);
       setSelectedFile('');
       form.resetFields();
+      inputEl.current.focus();
     }
   };
 
@@ -161,6 +165,18 @@ const ChatWindow = ({ handleClose, item }) => {
                 className="taecher"
                 style={{ marginBottom: "10px" }}
               >
+                {text.mediaUrl &&
+                  <div>
+                    <a href={text.mediaUrl} download target="_blank" className="media-file">
+                      {text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/')+1).match(/.(jpg|jpeg|png)$/i) &&
+                        <img src={text.mediaUrl} />
+                      }
+                      {!text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/')+1).match(/.(jpg|jpeg|png)$/i) &&
+                        text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/')+1)
+                      }
+                      </a>
+                  </div>
+                }
                 {text.message}
               </div>
             )
@@ -182,6 +198,7 @@ const ChatWindow = ({ handleClose, item }) => {
               size="large"
               suffix={suffix}
               onSearch={onSearch}
+              ref={inputEl}
             />
           </Form.Item>
         </Form>
