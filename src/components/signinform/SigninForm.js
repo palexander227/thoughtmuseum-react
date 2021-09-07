@@ -38,7 +38,6 @@ const SigninForm = () => {
         <h1>LOGIN</h1>
         <Form name="normal_login" autoFocus={true} onFinish={handleSignin}>
           <Form.Item
-            className="user-name"
             name="username"
             rules={[{ required: true, message: "User name is required!" }]}
           >

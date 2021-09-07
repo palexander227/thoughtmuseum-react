@@ -36,3 +36,11 @@
 .profile:hover {
   color: #4771bb;
 }
+
+.msg-box{
+  position: fixed !important;
+  bottom: 0 !important;
+  right: 29%;
+  display: flex !important;
+  z-index: 999;
+}

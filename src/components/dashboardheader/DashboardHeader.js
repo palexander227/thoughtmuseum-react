@@ -30,8 +30,8 @@ const DashboardHeader = () => {
   useEffect(async () => {
     await realTimeIntraction();
   }, []);
-  useEffect(()=>{
-    return ()=>{
+  useEffect(() => {
+    return () => {
       console.log('---exist--')
       socket.removeAllListeners("addMessage");
     }
@@ -60,12 +60,12 @@ const DashboardHeader = () => {
     socket.emit("join", user.id);
 
     socket.on('userOnline', (data) => {
-      console.log({data});
+      console.log({ data });
       store.dispatch(updateUserAvailability(data));
     });
 
     socket.on('userOffline', (data) => {
-      console.log({data});
+      console.log({ data });
       store.dispatch(updateUserAvailability(data));
     })
 

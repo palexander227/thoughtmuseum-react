@@ -12,10 +12,6 @@
   z-index: 99;
 }
 
-.user-name .ant-input {
-  text-transform: lowercase !important;
-}
-
 .signin-form h1 {
   padding-bottom: 10px;
 }

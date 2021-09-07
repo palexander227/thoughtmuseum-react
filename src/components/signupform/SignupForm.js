@@ -44,14 +44,12 @@ const SignupForm = () => {
         <Form name="normal_login" autoFocus={true} onFinish={handleSignup}>
           <Form.Item
             name="firstName"
-            className="reg-input"
             rules={[{ required: true, message: "First name is required!" }]}
           >
             <Input prefix={<UserIcon />} placeholder="First Name" />
           </Form.Item>
 
           <Form.Item
-            className="reg-input"
             name="lastName"
             rules={[{ required: true, message: "Last name is required!" }]}
           >
@@ -60,7 +58,6 @@ const SignupForm = () => {
 
           <Form.Item
             name="username"
-            className="reg-input"
             rules={[{ required: true, message: "User name is required!" }]}
           >
             <Input prefix={<UserIcon />} placeholder="User Name" />

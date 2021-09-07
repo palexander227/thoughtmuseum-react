@@ -67,7 +67,7 @@ const PostwithComment = ({
                   <Form
                     key={item.id}
                     preserve={false}
-                    className="kokoko"
+                    className="post-with-comment"
                     form={form}
                     name="normal_modal"
                     autoFocus={true}

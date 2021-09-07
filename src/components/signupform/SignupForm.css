@@ -64,13 +64,6 @@
   border-color: #00cec9;
 }
 
-.reg-input .ant-input {
-  text-transform: lowercase !important;
-}
-
-::placeholder {
-  text-transform: capitalize !important;
-}
 
 @media (max-width: 768px) {
   .signup-form {

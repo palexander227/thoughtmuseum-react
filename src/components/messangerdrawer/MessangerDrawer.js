@@ -7,58 +7,6 @@ import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import userServ from "../../service/user";
 import { useSelector } from "react-redux";
 
-const data = [
-  {
-    id: 1,
-    name: "Britt Brooke",
-    lastmsg: "Thanks for helping me",
-  },
-  {
-    id: 2,
-    name: "George Eads",
-    lastmsg: "Thanks for helping me",
-  },
-  {
-    id: 3,
-    name: "Selena Gomez",
-    lastmsg: "Thanks for helping me",
-  },
-  {
-    id: 4,
-    name: "James Franco",
-    lastmsg: "Thanks for helping me",
-  },
-  {
-    id: 5,
-    name: "Dwayne Johnson",
-    lastmsg: "Thanks for helping me",
-  },
-  {
-    id: 6,
-    name: "Octavia Spencer",
-    lastmsg: "Thanks for helping me",
-  },
-  {
-    id: 7,
-    name: "Margot Robbie",
-    lastmsg: "Thanks for helping me",
-  },
-  {
-    id: 8,
-    name: "Nicolas Cage",
-    lastmsg: "Thanks for helping me",
-  },
-  {
-    id: 9,
-    name: "Tiffany Haddish",
-    lastmsg: "Thanks for helping me",
-  },
-  {
-    id: 10,
-    name: "Johnny Depp",
-    lastmsg: "Thanks for helping me",
-  },
-];
 
 const MessangerDrawer = ({ showMessenger }) => {
   const [showuser, setShowUser] = useState(false);

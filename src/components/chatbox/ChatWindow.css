@@ -80,9 +80,9 @@
   background: white;
 }
 
-.msg-input .ant-input {
+/* .msg-input .ant-input {
   height: 35px !important;
-}
+} */
 
 .sendBtn {
   position: absolute;

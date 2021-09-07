@@ -43,9 +43,9 @@ const ChatWindow = ({ handleClose, item }) => {
     setMedia(e.target.files[0]);
     setSelectedFile(e.target.files[0].name)
   }
-  
+
   const onSearch = (value) => {
-    handleSendMessage({message: value});
+    handleSendMessage({ message: value });
   }
 
   const messagesEndRef = useRef(null);
@@ -66,7 +66,7 @@ const ChatWindow = ({ handleClose, item }) => {
     fetchConvsersation();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     scrollToBottom();
   }, [msg])
 
@@ -77,11 +77,7 @@ const ChatWindow = ({ handleClose, item }) => {
   }, [messages]);
 
   const handleSendMessage = async (value) => {
-    // const form = new FormData();
-    // form.append("message", value.message);
-    // form.append("isMedia", true);
-    // form.append("media", media);
-    // form.append("recieverId", item?.id);
+  
     let chatInfo = {
       message: value.message,
       isMedia: false,
@@ -99,7 +95,7 @@ const ChatWindow = ({ handleClose, item }) => {
       );
       chatInfo = formData;
     }
-    
+
 
     try {
       const res = await chatServ.SendOnlyMessage(chatInfo);
@@ -114,12 +110,6 @@ const ChatWindow = ({ handleClose, item }) => {
       inputEl.current.focus();
     }
   };
-
-  // useEffect(() => {
-  //   socket.on("newMessage", (newMessage) => {
-  //     console.log(newMessage);
-  //   });
-  // });
 
   return (
     <div className="chat-window">
@@ -147,13 +137,13 @@ const ChatWindow = ({ handleClose, item }) => {
                   {text.mediaUrl &&
                     <div>
                       <a href={text.mediaUrl} download target="_blank" className="media-file">
-                        {text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/')+1).match(/.(jpg|jpeg|png)$/i) &&
+                        {text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/') + 1).match(/.(jpg|jpeg|png)$/i) &&
                           <img src={text.mediaUrl} />
                         }
-                        {!text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/')+1).match(/.(jpg|jpeg|png)$/i) &&
-                          text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/')+1)
+                        {!text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/') + 1).match(/.(jpg|jpeg|png)$/i) &&
+                          text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/') + 1)
                         }
-                        </a>
+                      </a>
                     </div>
                   }
                   {text.message}
@@ -168,13 +158,13 @@ const ChatWindow = ({ handleClose, item }) => {
                 {text.mediaUrl &&
                   <div>
                     <a href={text.mediaUrl} download target="_blank" className="media-file">
-                      {text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/')+1).match(/.(jpg|jpeg|png)$/i) &&
+                      {text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/') + 1).match(/.(jpg|jpeg|png)$/i) &&
                         <img src={text.mediaUrl} />
                       }
-                      {!text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/')+1).match(/.(jpg|jpeg|png)$/i) &&
-                        text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/')+1)
+                      {!text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/') + 1).match(/.(jpg|jpeg|png)$/i) &&
+                        text.mediaUrl.substring(text.mediaUrl.lastIndexOf('/') + 1)
                       }
-                      </a>
+                    </a>
                   </div>
                 }
                 {text.message}
@@ -190,10 +180,10 @@ const ChatWindow = ({ handleClose, item }) => {
           name="normal_modal"
           autoFocus={true}
         >
-          {selectedFile && <div className="selected-file">{selectedFile}<CloseOutlined className="close-icon" onClick={removeFile}/></div>}
+          {selectedFile && <div className="selected-file">{selectedFile}<CloseOutlined className="close-icon" onClick={removeFile} /></div>}
           <Form.Item name="message">
             <Search
-              placeholder="Tpye here.."
+              placeholder="Type here.."
               enterButton={<SendOutlined />}
               size="large"
               suffix={suffix}

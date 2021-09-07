@@ -1,3 +1,7 @@
+.myclass {
+  position: relative;
+}
+
 .chat-section {
   margin: 0 auto;
   margin-bottom: 50px;
@@ -36,11 +40,11 @@
   padding: 10px 0;
 }
 
-.kokoko {
+.post-with-comment {
   position: relative;
 }
 
-.kokoko .ant-input {
+.post-with-comment .ant-input {
   height: 55px;
   padding-right: 130px;
 }
